@@ -1,5 +1,6 @@
 const { UserRepository } = require("../repostories");
-const AppError = require("../utils/errors/app-error");
+const { AppError } = require("../utils/errors/app-error");
+const { StatusCodes } = require("http-status-codes");
 
 const userRepo = new UserRepository();
 
@@ -8,6 +9,7 @@ async function create(data) {
     const user = await userRepo.create(data);
     return user;
   } catch (error) {
+    console.log(error);
     if (
       error.name == "SequelizeValidationError" ||
       error.name == "SequelizeUniqueConstraintError"
